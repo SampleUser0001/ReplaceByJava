@@ -12,7 +12,26 @@ java Replace <フォーマットファイル> hoge piyo fuga
 ```
 
 ```
-mvn clean compile exec:java -Dexec.mainClass="tool.Replace" -Dexec.args="'./sample.txt' 'hoge' 'piyo'"
+mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./sample.txt' 'hoge' 'piyo'"
+```
+
+## 実行(json版)
+
+置換マップとしてJSONを使用する。
+
+``` json : replace.json
+[
+  { "search": "{replace_1}" , "replace":"hogehoge" },
+  { "search": "{replace_2}" , "replace":"piyopiyo" }
+]
+```
+
+``` sh
+mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'<入力ファイルパス>' '<jsonファイルパス>'"
+```
+
+``` sh
+mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./sample.txt' './replace.json'"
 ```
 
 ## 備考
