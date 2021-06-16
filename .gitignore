@@ -1,2 +1,3 @@
 # Maven
 /target/
+!/target/Replace*with-dependencies.jar
