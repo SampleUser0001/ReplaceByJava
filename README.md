@@ -27,11 +27,11 @@ mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./sample.tx
 ```
 
 ``` sh
-mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'<入力ファイルパス>' '<jsonファイルパス>'"
+mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'${jsonファイルパス}' '${入力ファイルパス}' '${出力ファイルパス}'"
 ```
 
 ``` sh
-mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./sample.txt' './replace.json'"
+mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./replace.json' './input.txt' './output.txt'"
 ```
 
 ## 備考

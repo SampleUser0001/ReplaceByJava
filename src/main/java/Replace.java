@@ -1,6 +1,7 @@
 import java.util.Map;
 
 import java.io.File;
+import java.io.BufferedWriter;
 import java.util.List;
 
 import java.nio.file.Paths;
@@ -18,8 +19,9 @@ import bean.ReplaceBean;
  * フォーマットファイルを読み込んで置換する。
  */
 public class Replace {
-    public static final int ARGS_INDEX_INPUT_PATH = 0;
-    public static final int ARGS_INDEX_JSON_PATH = 1;
+    public static final int ARGS_INDEX_INPUT_PATH = 1;
+    public static final int ARGS_INDEX_JSON_PATH = 0;
+    public static final int ARGS_INDEX_OUTPUT_PATH = 2;
 
     public static void main( String[] args ) throws IOException {
         // jsonを読み込む
@@ -30,17 +32,20 @@ public class Replace {
                     .stream()
                     .collect(Collectors.toMap(ReplaceBean::getSearch, ReplaceBean::getReplace));
         
-        // ファイルを読み込んで置換する。
-        String inputPath = args[ARGS_INDEX_INPUT_PATH];
-        Files
-            .lines(Paths.get(inputPath))
-            .forEach(line -> {
-                 for(Map.Entry<String,String> entry : replaceMap.entrySet()){
-                     line = line.replace(entry.getKey(),entry.getValue());
-                 }
-                 System.out.println(line);
-             });
-        
-        
+        // 出力先ファイルをオープンする
+        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get(args[ARGS_INDEX_OUTPUT_PATH]))){
+            // ファイルを読み込んで置換する。
+            String inputPath = args[ARGS_INDEX_INPUT_PATH];
+            for(String line : Files.readAllLines(Paths.get(inputPath))) {
+                for(Map.Entry<String,String> entry : replaceMap.entrySet()){
+                    line = line.replace(entry.getKey(),entry.getValue());
+                }
+                writer.write(line);
+                writer.write(System.getProperty("line.separator"));
+            }
+        } catch(IOException e){
+            throw e;
+        }
+
     }
 }
