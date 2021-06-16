@@ -1,4 +1,5 @@
 hoge
+あああ
 {replace_2}
 piyo
 {replace_1}
