@@ -2,20 +2,9 @@
 
 Javaによる置換ツール。
 
-## 実行
+## 実行方法
 
-- フォーマットファイルを用意する。
-- フォーマットファイルの中に{replace_1}, {replace_2}, ... を設定しておくと、引数の値に置換する。
-
-```
-java Replace <フォーマットファイル> hoge piyo fuga
-```
-
-```
-mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./sample.txt' 'hoge' 'piyo'"
-```
-
-## 実行(json版)
+### フォーマットファイルを用意する
 
 置換マップとしてJSONを使用する。
 
@@ -26,13 +15,15 @@ mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./sample.tx
 ]
 ```
 
-``` sh
-mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'${jsonファイルパス}' '${入力ファイルパス}' '${入力ファイル文字コード}' '${出力ファイルパス}' '${出力ファイル文字コード}'"
+### 実行
+
+``` bash
+from=./testdata/from
+to=./testdata/to
+replacemap=./replace.json
+./mvnw clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'${from}' '${to}' '${replacemap}'"
 ```
 
-``` sh
-mvn clean compile exec:java -Dexec.mainClass="Replace" -Dexec.args="'./replace.json' './input.txt' 'UTF-8' './output.txt' 'UTF-8'"
-```
 
 ## 備考
 

@@ -1,4 +1,4 @@
 [
   { "search": "{replace_1}" , "replace":"hogehoge" },
-  { "search": "{replace_2}" , "replace":"piyopiyo" }
+  { "search": "{replace_2}" , "replace":"あいう" }
 ]
